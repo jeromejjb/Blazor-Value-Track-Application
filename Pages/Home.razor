@@ -1,0 +1,140 @@
+﻿@page "/"
+
+<div class="dashboard-container">
+    <div class="welcome-section">
+        <h1>Impact Dashboard</h1>
+        <p class="subtitle">Tracking value creation and societal impact of innovative leaders</p>
+    </div>
+
+    <div class="stats-overview">
+        <div class="stat-card">
+            <span class="stat-value">2.1M+</span>
+            <span class="stat-label">Jobs Created</span>
+            <div class="stat-trend positive">+12% this year</div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">$850B+</span>
+            <span class="stat-label">Shareholder Value</span>
+            <div class="stat-trend positive">+15% this year</div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value">145+</span>
+            <span class="stat-label">Innovation Patents</span>
+            <div class="stat-trend positive">+8% this year</div>
+        </div>
+    </div>
+
+    <div class="impact-grid">
+        <div class="impact-card featured">
+            <div class="impact-header">
+                <img src="images/placeholder.jpg" alt="Leader" class="impact-avatar" />
+                <div class="impact-title">
+                    <h3>Lisa Su</h3>
+                    <p>AMD - Semiconductor Innovation</p>
+                </div>
+                <div class="impact-score">
+                    <span>Impact Score</span>
+                    <strong>98</strong>
+                </div>
+            </div>
+            <div class="impact-metrics">
+                <div class="metric">
+                    <span class="metric-value">+1200%</span>
+                    <span class="metric-label">Stock Performance</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">15,000+</span>
+                    <span class="metric-label">Jobs Created</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">50+</span>
+                    <span class="metric-label">Innovation Patents</span>
+                </div>
+            </div>
+            <div class="impact-description">
+                Transformed AMD from a struggling company to a semiconductor powerhouse, 
+                revolutionizing high-performance computing accessibility.
+            </div>
+            <div class="impact-tags">
+                <span class="tag">Innovation</span>
+                <span class="tag">Technology</span>
+                <span class="tag">Leadership</span>
+            </div>
+        </div>
+
+        <div class="impact-card">
+            <div class="impact-header">
+                <img src="images/placeholder.jpg" alt="Leader" class="impact-avatar" />
+                <div class="impact-title">
+                    <h3>Jensen Huang</h3>
+                    <p>NVIDIA - AI & Computing</p>
+                </div>
+                <div class="impact-score">
+                    <span>Impact Score</span>
+                    <strong>96</strong>
+                </div>
+            </div>
+            <div class="impact-metrics">
+                <div class="metric">
+                    <span class="metric-value">+2400%</span>
+                    <span class="metric-label">Stock Performance</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">25,000+</span>
+                    <span class="metric-label">Jobs Created</span>
+                </div>
+            </div>
+            <div class="impact-tags">
+                <span class="tag">AI</span>
+                <span class="tag">Innovation</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-impacts">
+        <h2>Recent Impact Highlights</h2>
+        <div class="impact-timeline">
+            @foreach (var highlight in recentHighlights)
+            {
+                <div class="timeline-item">
+                    <div class="timeline-date">@highlight.Date</div>
+                    <div class="timeline-content">
+                        <h4>@highlight.Title</h4>
+                        <p>@highlight.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<ImpactHighlight> recentHighlights = new List<ImpactHighlight>
+    {
+        new ImpactHighlight 
+        { 
+            Date = "2024", 
+            Title = "Sustainable Innovation Initiative",
+            Description = "Launch of $1B investment in sustainable technology development."
+        },
+        new ImpactHighlight 
+        { 
+            Date = "2023", 
+            Title = "Job Creation Milestone",
+            Description = "Created 50,000 new jobs through expansion into emerging markets."
+        },
+        new ImpactHighlight 
+        { 
+            Date = "2023", 
+            Title = "Education Impact",
+            Description = "Established tech education programs reaching 1M+ students globally."
+        }
+    };
+
+    private class ImpactHighlight
+    {
+        public string Date { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+    }
+}

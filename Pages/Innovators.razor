@@ -1,0 +1,84 @@
+@page "/innovators"
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>Innovation Leaders</h1>
+        <p class="header-description">
+            Explore leaders who have created significant societal impact through innovation and value creation.
+            Each profile shows measurable impact on jobs, technology advancement, and stakeholder value.
+        </p>
+    </div>
+
+    <div class="filter-section">
+        <div class="search-box">
+            <input type="text" placeholder="Search innovators..." />
+        </div>
+        <div class="filter-tags">
+            <button class="filter-tag active">All</button>
+            <button class="filter-tag">Technology</button>
+            <button class="filter-tag">Sustainability</button>
+            <button class="filter-tag">Healthcare</button>
+            <button class="filter-tag">Finance</button>
+        </div>
+    </div>
+
+    <div class="innovators-grid">
+        @foreach (var innovator in innovators)
+        {
+            <div class="innovator-card">
+                <div class="innovator-header">
+                    <img src="@innovator.ImageUrl" alt="@innovator.Name" />
+                    <div class="innovator-info">
+                        <h3>@innovator.Name</h3>
+                        <p>@innovator.Company</p>
+                    </div>
+                </div>
+                <div class="impact-metrics">
+                    <div class="metric">
+                        <span class="metric-value">@innovator.JobsCreated</span>
+                        <span class="metric-label">Jobs Created</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">@innovator.ValueCreated</span>
+                        <span class="metric-label">Value Created</span>
+                    </div>
+                </div>
+                <p class="innovator-description">@innovator.Description</p>
+                <div class="impact-areas">
+                    @foreach (var area in innovator.ImpactAreas)
+                    {
+                        <span class="impact-tag">@area</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<InnovatorModel> innovators = new()
+    {
+        new InnovatorModel
+        {
+            Name = "Lisa Su",
+            Company = "AMD",
+            ImageUrl = "images/placeholder.jpg",
+            JobsCreated = "15,000+",
+            ValueCreated = "$150B+",
+            Description = "Transformed AMD through technological innovation and strategic leadership, revolutionizing the semiconductor industry.",
+            ImpactAreas = new[] { "Technology", "Innovation", "Manufacturing" }
+        },
+        // Add more innovators here
+    };
+
+    private class InnovatorModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Company { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
+        public string JobsCreated { get; set; } = string.Empty;
+        public string ValueCreated { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string[] ImpactAreas { get; set; } = Array.Empty<string>();
+    }
+} 

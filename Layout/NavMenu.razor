@@ -1,0 +1,147 @@
+﻿@using BlazorApp.Services
+@inject NavigationManager NavigationManager
+@inject IStockService StockService
+
+<nav class="navbar">
+    <div class="nav-brand">
+        <a href="">Value<span class="brand-highlight">Impact</span></a>
+    </div>
+
+    <div class="nav-content">
+        <div class="stock-search">
+            <input type="text" class="form-control" placeholder="Enter stock symbol (e.g., AAPL)..." 
+                   @bind="StockSymbol" 
+                   @bind:event="oninput"
+                   @onkeyup="HandleKeyPress" />
+        </div>
+
+        <div class="nav-links">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-graph" aria-hidden="true"></span> Impact Dashboard
+            </NavLink>
+            <NavLink class="nav-link" href="innovators">
+                <span class="oi oi-people" aria-hidden="true"></span> Innovators
+            </NavLink>
+            <NavLink class="nav-link" href="impact-metrics">
+                <span class="oi oi-chart" aria-hidden="true"></span> Impact Metrics
+            </NavLink>
+            @if (!string.IsNullOrEmpty(CurrentStock?.Symbol))
+            {
+                <NavLink class="nav-link" href="@($"stock/{CurrentStock.Symbol}")">
+                    <span class="oi oi-dollar" aria-hidden="true"></span>
+                    @CurrentStock.Symbol
+                    <span class="@(CurrentStock.Change >= 0 ? "text-success" : "text-danger")">
+                        $@CurrentStock.Price.ToString("F2")
+                        (@CurrentStock.ChangePercent.ToString("F2")%)
+                    </span>
+                </NavLink>
+            }
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar {
+        background-color: #1a1a1a;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .nav-brand a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .brand-highlight {
+        color: #17BECF;
+    }
+
+    .nav-content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .stock-search {
+        width: 300px;
+    }
+
+    .stock-search input {
+        background-color: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    .stock-search input::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+    .stock-search input:focus {
+        background-color: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.3);
+        outline: none;
+        box-shadow: 0 0 0 0.25rem rgba(255,255,255,0.1);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-link {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: white;
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .nav-link.active {
+        color: white;
+        background-color: rgba(255,255,255,0.15);
+    }
+
+    .text-success {
+        color: #28a745;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>
+
+@code {
+    private string StockSymbol { get; set; } = "";
+    private StockData? CurrentStock { get; set; }
+
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(StockSymbol))
+        {
+            try
+            {
+                CurrentStock = await StockService.GetStockDataAsync(StockSymbol.ToUpper());
+                NavigationManager.NavigateTo($"stock/{StockSymbol.ToUpper()}");
+            }
+            catch (Exception)
+            {
+                // Handle error (you might want to show a notification)
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+bin/
+obj/
+.vscode/
+*.suo
+*.user
+_ReSharper.*
+*.DS_Store
+.vs/
+.idea/
+*.userprefs
+*.dbmdl
+*.jfm
+node_modules/
+.env 

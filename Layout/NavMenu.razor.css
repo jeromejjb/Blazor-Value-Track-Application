@@ -1,0 +1,135 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    height: 70px;
+    background: linear-gradient(to right, #1e3a8a, #312e81);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+}
+
+.nav-brand a {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.brand-highlight {
+    color: #60a5fa;
+    margin-left: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    color: #fff;
+    background: rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.nav-search {
+    position: relative;
+}
+
+.nav-search input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    color: #fff;
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.nav-search input::placeholder {
+    color: #cbd5e1;
+}
+
+.nav-search input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(96, 165, 250, 0.5);
+    outline: none;
+    width: 300px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-toggler {
+        display: block;
+        background: none;
+        border: none;
+        color: #fff;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: #1e3a8a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        display: none;
+    }
+
+    .nav-menu:not(.collapse) {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-search {
+        width: 100%;
+    }
+
+    .nav-search input {
+        width: 100%;
+    }
+
+    .nav-search input:focus {
+        width: 100%;
+    }
+}

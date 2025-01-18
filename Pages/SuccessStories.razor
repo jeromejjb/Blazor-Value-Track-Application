@@ -1,0 +1,84 @@
+@page "/success-stories"
+
+<div class="page-container">
+    <div class="page-header">
+        <h1>Success Stories</h1>
+        <p class="header-description">
+            Real-world examples of how innovative leaders have created lasting positive impact
+            through their vision and execution.
+        </p>
+    </div>
+
+    <div class="stories-grid">
+        @foreach (var story in successStories)
+        {
+            <div class="story-card">
+                <div class="story-image">
+                    <img src="@story.ImageUrl" alt="@story.Title" />
+                </div>
+                <div class="story-content">
+                    <h2>@story.Title</h2>
+                    <div class="story-meta">
+                        <span class="story-company">@story.Company</span>
+                        <span class="story-year">@story.Year</span>
+                    </div>
+                    <p class="story-description">@story.Description</p>
+                    <div class="story-metrics">
+                        @foreach (var metric in story.KeyMetrics)
+                        {
+                            <div class="story-metric">
+                                <span class="metric-value">@metric.Value</span>
+                                <span class="metric-label">@metric.Label</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="story-tags">
+                        @foreach (var tag in story.Tags)
+                        {
+                            <span class="tag">@tag</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<SuccessStory> successStories = new()
+    {
+        new SuccessStory
+        {
+            Title = "Revolutionizing Electric Vehicles",
+            Company = "Tesla",
+            Year = "2012-2023",
+            ImageUrl = "images/placeholder.jpg",
+            Description = "How Tesla transformed the automotive industry and accelerated the world's transition to sustainable energy.",
+            KeyMetrics = new[]
+            {
+                new Metric { Value = "3M+", Label = "EVs Produced" },
+                new Metric { Value = "110K+", Label = "Jobs Created" },
+                new Metric { Value = "$800B+", Label = "Market Impact" }
+            },
+            Tags = new[] { "Sustainability", "Innovation", "Manufacturing" }
+        },
+        // Add more success stories
+    };
+
+    private class SuccessStory
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Company { get; set; } = string.Empty;
+        public string Year { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public Metric[] KeyMetrics { get; set; } = Array.Empty<Metric>();
+        public string[] Tags { get; set; } = Array.Empty<string>();
+    }
+
+    private class Metric
+    {
+        public string Value { get; set; } = string.Empty;
+        public string Label { get; set; } = string.Empty;
+    }
+} 
